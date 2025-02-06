@@ -110,7 +110,7 @@ let
       '';
 
   inherit
-    (({ right, wrong }: { runtimeDependencies = right; buildtimeDependencies = wrong; })
+    (({ right, wrong }: { runtimeDependencies = right ++ buildtimeDependencies; buildtimeDependencies = wrong; })
       (partition (drv: drv.stdenv.hostPlatform == stdenv.hostPlatform)
         (concatLists [
           (attrValues dependencies)
