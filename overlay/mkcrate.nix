@@ -256,6 +256,7 @@ let
     '';
 
     setBuildEnv = ''
+      
       CARGO_BUILD_INCREMENTAL=0  #builds inside nix sandbox use nix caching, not cargo target caching
       MINOR_RUSTC_VERSION="$(${rustToolchain}/bin/rustc --version | cut -d . -f 2)"
 
@@ -273,6 +274,7 @@ let
 
       . ${./mkcrate-utils.sh}
 
+      export RUSTC_BOOTSTRAP=1
       export CARGO_VERBOSE=`cargoVerbosityLevel $NIX_DEBUG`
       export NIX_RUST_METADATA=`extractHash $out`
       export CARGO_HOME=`pwd`/.cargo
