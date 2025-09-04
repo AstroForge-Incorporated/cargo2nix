@@ -360,7 +360,8 @@ reducePackageToml () {
                 ."build-dependencies",
                 .["dev-dependencies"],
                 .target,
-                .workspace)
+                .workspace,
+                .lints)
             + '"$manifestPatch" \
             | jq 'del(.[][] | nulls)' \
             | remarshal -if json -of toml > "$2"
