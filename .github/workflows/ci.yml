@@ -59,18 +59,26 @@ jobs:
       - name: build examples
         run: |
           if [[ $RUNNER_OS == Linux ]]; then
-          nix build ./examples/1-hello-world#
-          nix build ./examples/2-bigger-project#
-          nix build ./examples/3-cross-compiling#
-          nix build ./examples/4-independent-packaging#
+          nix build ./examples/1-hello-world# \
+            --no-write-lock-file
+          nix build ./examples/2-bigger-project# \
+            --no-write-lock-file
+          nix build ./examples/3-cross-compiling# \
+            --no-write-lock-file
+          nix build ./examples/4-independent-packaging# \
+            --no-write-lock-file
           else
           nix build ./examples/1-hello-world# \
+            --no-write-lock-file \
             --override-input nixpkgs github:nixos/nixpkgs/nixpkgs-23.11-darwin
           nix build ./examples/2-bigger-project# \
+            --no-write-lock-file \
             --override-input nixpkgs github:nixos/nixpkgs/nixpkgs-23.11-darwin
           # nix build ./examples/3-cross-compiling#
+          #   --no-write-lock-file \
           #   --override-input nixpkgs github:nixos/nixpkgs/nixpkgs-23.11-darwin
           nix build ./examples/4-independent-packaging# \
+            --no-write-lock-file \
             --override-input nixpkgs github:nixos/nixpkgs/nixpkgs-23.11-darwin
           fi
 

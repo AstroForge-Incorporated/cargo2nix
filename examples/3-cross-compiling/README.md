@@ -45,6 +45,9 @@ nix-repl> lib.systems.examples.wasi32
 { config = "wasm32-unknown-wasi"; useLLVM = true; }
 ```
 
+This example uses `wasm32-wasi` below because Rust 1.75 provides its WASI
+standard library component under that target name.
+
 Most crossSystem values are simple like this.  Others make more specific
 changes.  Many only set the `config` attribute to a host triple + abi like
 `x86_64-unknown-linux-musl`.
@@ -183,7 +186,7 @@ Create a new file called [`flake.nix`]:
           # };
 
           crossSystem = {
-            config = "wasm32-unknown-wasi";
+            config = "wasm32-wasi";
             # Nixpkgs currently only supports LLVM lld linker for wasm32-wasi.
             useLLVM = true;
           };

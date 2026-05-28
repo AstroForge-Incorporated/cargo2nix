@@ -32,7 +32,7 @@
           # };
 
           crossSystem = {
-            config = "wasm32-unknown-wasi";
+            config = "wasm32-wasi";
             # Nixpkgs currently only supports LLVM lld linker for wasm32-wasi.
             useLLVM = true;
           };
