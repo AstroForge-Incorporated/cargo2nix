@@ -33,6 +33,7 @@
 
           crossSystem = {
             config = "wasm32-wasi";
+            rustc.config = "wasm32-wasi";
             # Nixpkgs currently only supports LLVM lld linker for wasm32-wasi.
             useLLVM = true;
           };
