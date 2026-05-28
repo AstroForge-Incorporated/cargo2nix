@@ -2,7 +2,7 @@
 rec {
   fetchCratesIo = { name, version, sha256 }: buildPackages.fetchurl {
     name = "${name}-${version}.tar.gz";
-    url = "https://crates.io/api/v1/crates/${name}/${version}/download";
+    url = "https://static.crates.io/crates/${name}/${name}-${version}.crate";
     inherit sha256;
   };
 
