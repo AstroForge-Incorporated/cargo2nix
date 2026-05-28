@@ -45,8 +45,8 @@ nix-repl> lib.systems.examples.wasi32
 { config = "wasm32-unknown-wasi"; useLLVM = true; }
 ```
 
-This example uses `wasm32-wasi` below because Rust 1.75 provides its WASI
-standard library component under that target name.
+This example sets cargo2nix's Rust target to `wasm32-wasi` below because Rust
+1.75 provides its WASI standard library component under that target name.
 
 Most crossSystem values are simple like this.  Others make more specific
 changes.  Many only set the `config` attribute to a host triple + abi like
@@ -203,7 +203,7 @@ Create a new file called [`flake.nix`]:
           # nixpkgs, set this target
           # target = "aarch64-unknown-linux-gnu";
           # target = "x86_64-unknown-linux-musl";
-          # target = "wasm32-wasi";
+          target = "wasm32-wasi";
         };
 
       in rec {

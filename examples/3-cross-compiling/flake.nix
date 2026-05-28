@@ -49,7 +49,7 @@
           # nixpkgs, set this target
           # target = "aarch64-unknown-linux-gnu";
           # target = "x86_64-unknown-linux-musl";
-          # target = "wasm32-wasi";
+          target = "wasm32-wasi";
         };
 
       in rec {
