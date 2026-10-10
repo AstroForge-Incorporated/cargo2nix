@@ -5,11 +5,6 @@ extractFileExt() {
   echo "${name##*.}"
 }
 
-extractHash() {
-  local name=$(basename "$1")
-  echo "${name%%-*}"
-}
-
 makeExternCrateFlags() {
   for (( i=1; i<$#; i+=2 )); do
     local extern_name="${@:$i:1}"

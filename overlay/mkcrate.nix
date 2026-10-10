@@ -64,6 +64,13 @@ let
   cxxForHost="${cc}/bin/${targetPrefix}c++";
   rustBuildTriple = rustTriple stdenv.buildPlatform;
   rustHostTriple = if (target != null) then target else rustTriple stdenv.hostPlatform;
+  # rustc folds -C metadata into every symbol it mangles. Keying it on crate identity instead of the
+  # output hash stops a source edit from renaming symbols, and so reshuffling code, in every dependent.
+  rustMetadata = substring 0 16 (hashString "sha256" (toJSON {
+    inherit name version registry rustHostTriple compileMode;
+    features = sort lessThan features;
+    profile = decideProfile compileMode release;
+  }));
   buildCargoConfig = lib.foldl lib.recursiveUpdate cargoConfig [
     {
       net.offline = true;
@@ -251,7 +258,7 @@ let
       . ${./mkcrate-utils.sh}
 
       export CARGO_VERBOSE=`cargoVerbosityLevel $NIX_DEBUG`
-      export NIX_RUST_METADATA=`extractHash $out`
+      export NIX_RUST_METADATA=${rustMetadata}
       export CARGO_HOME=`pwd`/.cargo
 
       mkdir -p deps build_deps
